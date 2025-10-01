@@ -1,0 +1,2 @@
+ALTER TABLE "cities" ADD CONSTRAINT "cities_id_foreign" FOREIGN KEY("id") REFERENCES "collects"("id");
+ALTER TABLE "coordinates" ADD CONSTRAINT "coordinates_id_foreign" FOREIGN KEY("id") REFERENCES "cities"("id");
