@@ -3,10 +3,7 @@ package skillup.projet_adaction_api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import skillup.projet_adaction_api.entities.Volunteer;
 import skillup.projet_adaction_api.repositories.VolunteerRepository;
 import skillup.projet_adaction_api.services.VolunteerService;
@@ -30,7 +27,7 @@ public class VolunteerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Volunteer> getPersonById(@PathVariable Long id){
+    public ResponseEntity<Volunteer> getVolunteerById(@PathVariable Long id){
         Optional<Volunteer> volunteer = volunteerService.getVolunteerById(id);
 
         if(volunteer.isPresent()) {
@@ -38,5 +35,12 @@ public class VolunteerController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping
+    public ResponseEntity<Volunteer> createVolunteer(@RequestBody Volunteer volunteer){
+        Volunteer volunteerCreated = volunteerService.createVolunteer(volunteer);
+        return new ResponseEntity<>(volunteerCreated, HttpStatus.CREATED);
+    }
+
 
 }
