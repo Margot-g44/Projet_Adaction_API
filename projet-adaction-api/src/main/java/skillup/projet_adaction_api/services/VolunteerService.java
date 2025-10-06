@@ -45,4 +45,15 @@ public class VolunteerService {
 
         return Optional.empty();
     }
+
+    @Transactional
+    public Optional<Volunteer> deleteVolunteer(Long id) {
+        Optional<Volunteer> volunteer = volunteerRepository.findById(id);
+
+        if (volunteer.isPresent()) {
+            volunteerRepository.delete(volunteer.get());
+        }
+
+        return volunteer;
+    }
 }
