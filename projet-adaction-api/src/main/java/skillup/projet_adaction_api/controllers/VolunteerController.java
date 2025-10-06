@@ -23,11 +23,12 @@ public class VolunteerController {
 
     @GetMapping
     public ResponseEntity<List<Volunteer>> getAllVolunteers(){
-        return new ResponseEntity<>(volunteerService.getAllVolunteer(), HttpStatus.OK);
+        return new ResponseEntity<>(volunteerService.getAllVolunteers(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Volunteer> getVolunteerById(@PathVariable Long id){
+        
         Optional<Volunteer> volunteer = volunteerService.getVolunteerById(id);
 
         if(volunteer.isPresent()) {
@@ -42,5 +43,14 @@ public class VolunteerController {
         return new ResponseEntity<>(volunteerCreated, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Volunteer> updateVolunteer(@PathVariable Long id, @RequestBody Volunteer volunteerDetails){
+        Optional<Volunteer> volunteer = volunteerService.updateVolunteer(id, volunteerDetails);
+
+        if(volunteer.isPresent()){
+            return new ResponseEntity<>(volunteer.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 }
