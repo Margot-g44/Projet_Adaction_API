@@ -58,7 +58,7 @@ public class VolunteerController {
         Optional<Volunteer> deletedVolunteer = volunteerService.deleteVolunteer(id);
 
         if (deletedVolunteer.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 standard pour une suppression réussie
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

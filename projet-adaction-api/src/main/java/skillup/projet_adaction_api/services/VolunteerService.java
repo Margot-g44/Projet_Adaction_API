@@ -38,7 +38,12 @@ public class VolunteerService {
             Volunteer existingVolunteer = optionalVolunteer.get();
             existingVolunteer.setFirstname(volunteerDetails.getFirstname());
             existingVolunteer.setLastname(volunteerDetails.getLastname());
+            existingVolunteer.setEmail(volunteerDetails.getEmail());
+            existingVolunteer.setPassword(volunteerDetails.getPassword());
             existingVolunteer.setLocation(volunteerDetails.getLocation());
+            existingVolunteer.setUpdated_at(volunteerDetails.getUpdated_at());
+            existingVolunteer.setTotal_points(volunteerDetails.getTotal_points());
+            existingVolunteer.setDonation_points(volunteerDetails.getDonation_points());
             Volunteer updatedVolunteer = volunteerRepository.save(existingVolunteer);
             return Optional.of(updatedVolunteer);
         }
