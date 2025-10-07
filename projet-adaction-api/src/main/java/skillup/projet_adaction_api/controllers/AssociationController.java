@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/assocations")
+@RequestMapping("/api/associations")
 public class AssociationController {
 
     private final AssociationService associationService;
