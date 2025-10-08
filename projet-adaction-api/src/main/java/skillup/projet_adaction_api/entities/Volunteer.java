@@ -3,6 +3,7 @@ package skillup.projet_adaction_api.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "volunteers")
@@ -37,6 +38,9 @@ public class Volunteer {
 
     @Column(nullable = false )
     private int donation_points;
+
+    @OneToMany(mappedBy = "volunteer")
+    private List<Collect> collects;
 
     public Long getId() {
         return id;
@@ -116,5 +120,9 @@ public class Volunteer {
 
     public void setDonation_points(int donation_points) {
         this.donation_points = donation_points;
+    }
+
+    public void setCollects(List<Collect> collects) {
+        this.collects = collects;
     }
 }
