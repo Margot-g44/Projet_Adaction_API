@@ -1,5 +1,6 @@
 package skillup.projet_adaction_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -40,6 +41,7 @@ public class Volunteer {
     private int donation_points;
 
     @OneToMany(mappedBy = "volunteer")
+    @JsonBackReference
     private List<Collect> collects;
 
     public Long getId() {

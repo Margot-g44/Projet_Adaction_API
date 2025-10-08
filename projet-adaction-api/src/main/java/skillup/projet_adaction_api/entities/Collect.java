@@ -1,5 +1,6 @@
 package skillup.projet_adaction_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -34,6 +35,7 @@ public class Collect {
     private int others_nb;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn( name = "volunteer_id", nullable = false )
     private Volunteer volunteer;
 
