@@ -40,7 +40,7 @@ public class Volunteer {
     @Column(nullable = false )
     private int donation_points;
 
-    @OneToMany(mappedBy = "volunteer")
+    @OneToMany( mappedBy = "volunteer")
     @JsonBackReference
     private List<Collect> collects;
 
@@ -122,9 +122,5 @@ public class Volunteer {
 
     public void setDonation_points(int donation_points) {
         this.donation_points = donation_points;
-    }
-
-    public void setCollects(List<Collect> collects) {
-        this.collects = collects;
     }
 }
