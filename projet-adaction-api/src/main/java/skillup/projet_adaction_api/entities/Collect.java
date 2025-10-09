@@ -1,11 +1,15 @@
 package skillup.projet_adaction_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "collects")
 public class Collect {
     @Id
@@ -13,29 +17,30 @@ public class Collect {
     private Long id;
 
     @Column( nullable = false )
-    private Date date;
+    private LocalDate date;
 
     @ManyToOne
+    @JsonBackReference("city-collect")
     @JoinColumn( name = "city_id", nullable = false )
     private City city;
 
     @Column( nullable = true )
-    private int glass_nb;
+    private Integer glass_nb;
 
     @Column( nullable = true )
-    private int butt_nb;
+    private Integer butt_nb;
 
     @Column( nullable = true )
-    private int plastic_nb;
+    private Integer plastic_nb;
 
     @Column( nullable = true )
-    private int electronics_nb;
+    private Integer electronics_nb;
 
     @Column( nullable = true )
-    private int others_nb;
+    private Integer others_nb;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference("volunteer-collect")
     @JoinColumn( name = "volunteer_id", nullable = false )
     private Volunteer volunteer;
 
@@ -47,11 +52,11 @@ public class Collect {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

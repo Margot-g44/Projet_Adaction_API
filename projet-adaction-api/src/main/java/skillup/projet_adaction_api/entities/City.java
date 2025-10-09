@@ -1,11 +1,17 @@
 package skillup.projet_adaction_api.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 @Entity
 @Table(name = "cities")
 public class City {
@@ -18,12 +24,11 @@ public class City {
     private String name;
 
     @ManyToOne
-    @JsonManagedReference
     @JoinColumn(name = "coordinate_id", nullable = false)
     private Coordinate coordinate;
 
     @OneToMany(mappedBy = "city")
-    @JsonBackReference
+    @JsonManagedReference("city-collect")
     private List<Collect> collects;
 
 

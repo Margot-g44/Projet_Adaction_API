@@ -10,6 +10,7 @@ import skillup.projet_adaction_api.services.CollectService;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/collects")
 public class CollectController {
@@ -33,7 +34,7 @@ public class CollectController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Collect> createCollect(@RequestBody Collect collect) {
         Collect createdCollect = collectService.createCollect(collect);
         return new ResponseEntity<>(createdCollect, HttpStatus.CREATED);
