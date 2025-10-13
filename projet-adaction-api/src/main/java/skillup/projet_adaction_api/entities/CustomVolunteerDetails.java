@@ -1,5 +1,5 @@
 // CustomVolunteerDetails.java
-package skillup.projet_adaction_api.services;
+package skillup.projet_adaction_api.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
