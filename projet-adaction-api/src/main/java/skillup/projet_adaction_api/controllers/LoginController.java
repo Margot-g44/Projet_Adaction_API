@@ -1,7 +1,9 @@
 package skillup.projet_adaction_api.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,4 +37,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
+    public ResponseEntity<?> loginVolunteer(@RequestBody Volunteer volunteer) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(volunteer.getFirstname(), volunteer.getPassword()));
+            return ResponseEntity.ok("login successful");
+        } catch(Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
+    }
 }
