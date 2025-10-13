@@ -6,4 +6,5 @@ import skillup.projet_adaction_api.entities.Volunteer;
 
 @Repository
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
+Volunteer findByEmail (String email);
 }
