@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import skillup.projet_adaction_api.services.VolunteerDetailsService;
 
 @Configuration
@@ -17,11 +18,12 @@ import skillup.projet_adaction_api.services.VolunteerDetailsService;
 public class SecurityConfig {
 
     private final VolunteerDetailsService volunteerDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(VolunteerDetailsService volunteerDetailsService) {
+    public SecurityConfig(VolunteerDetailsService volunteerDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.volunteerDetailsService = volunteerDetailsService;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,8 +31,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/login").permitAll()
-                                .anyRequest().authenticated()).
-                build();
+                                .anyRequest().authenticated())
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean

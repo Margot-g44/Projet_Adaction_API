@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import skillup.projet_adaction_api.config.JwtUtil;
 import skillup.projet_adaction_api.entities.Volunteer;
 import skillup.projet_adaction_api.repositories.VolunteerRepository;
 
@@ -19,11 +20,13 @@ public class LoginController {
     private final VolunteerRepository volunteerRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
-    public LoginController(VolunteerRepository volunteerRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    public LoginController(VolunteerRepository volunteerRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.volunteerRepository = volunteerRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
     }
 
 
@@ -39,10 +42,11 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> loginVolunteer(@RequestBody Volunteer volunteer) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(volunteer.getFirstname(), volunteer.getPassword()));
-            return ResponseEntity.ok("login successful");
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(volunteer.getEmail(), volunteer.getPassword()));
+            String token = jwtUtil.generateToken(volunteer.getEmail());
+            return ResponseEntity.ok().body("Bearer " + token);
         } catch(Exception ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
     }
 }
