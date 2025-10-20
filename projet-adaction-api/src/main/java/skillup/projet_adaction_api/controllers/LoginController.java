@@ -5,13 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import skillup.projet_adaction_api.config.JwtUtil;
 import skillup.projet_adaction_api.entities.Volunteer;
 import skillup.projet_adaction_api.repositories.VolunteerRepository;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -44,7 +43,7 @@ public class LoginController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(volunteer.getEmail(), volunteer.getPassword()));
             String token = jwtUtil.generateToken(volunteer.getEmail());
-            return ResponseEntity.ok().body("Bearer " + token);
+            return ResponseEntity.ok().body(Map.of("token", token));
         } catch(Exception ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
