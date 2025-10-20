@@ -41,6 +41,8 @@ public class Volunteer {
     @Column(nullable = false )
     private int donation_points;
 
+
+
     @OneToMany( mappedBy = "volunteer")
     @JsonManagedReference("volunteer-collect")
     private List<Collect> collects;
