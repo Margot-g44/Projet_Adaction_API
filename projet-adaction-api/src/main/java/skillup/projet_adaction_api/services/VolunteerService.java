@@ -1,7 +1,6 @@
 package skillup.projet_adaction_api.services;
 
 import jakarta.transaction.Transactional;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import skillup.projet_adaction_api.entities.Volunteer;
 import skillup.projet_adaction_api.repositories.VolunteerRepository;

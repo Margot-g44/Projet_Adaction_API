@@ -13,7 +13,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
     private final String SECRET_KEY = "adaction_super_secret_key_adaction_super_secret_key";
-    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 heures
+    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10;
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());

@@ -1,4 +1,3 @@
-// CustomVolunteerDetails.java
 package skillup.projet_adaction_api.entities;
 
 import org.springframework.security.core.GrantedAuthority;

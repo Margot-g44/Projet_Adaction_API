@@ -1,11 +1,9 @@
 package skillup.projet_adaction_api.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import skillup.projet_adaction_api.entities.Volunteer;
-import skillup.projet_adaction_api.repositories.VolunteerRepository;
 import skillup.projet_adaction_api.services.VolunteerService;
 
 import java.util.List;
